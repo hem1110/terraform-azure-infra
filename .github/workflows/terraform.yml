@@ -1,3 +1,30 @@
+name: Terraform Azure Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Choose terraform action'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+          - apply
+          - destroy
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.7
+
     - name: Terraform Init
       working-directory: ./cloud_infrastructure
       run: terraform init
