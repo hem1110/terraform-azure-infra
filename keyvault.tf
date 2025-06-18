@@ -1,3 +1,4 @@
+data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "main" {
   name                          = "kv-hemanth"
